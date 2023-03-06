@@ -1,0 +1,6 @@
+menu "Bosch BME680 Sensor" 
+    config BME688_ADDRESS
+        hex
+        prompt "Air BME680 Sensor Address"
+        default 0x77
+endmenu
