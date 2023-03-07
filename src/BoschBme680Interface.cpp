@@ -60,7 +60,7 @@ namespace Environment
             return ESP_FAIL;
         }
     }
-    
+
     void bme68x_check_rslt(const char api_name[], int8_t rslt)
     {
         switch (rslt)
@@ -167,7 +167,8 @@ namespace Environment
                      data[i].status,
                      data[i].gas_index,
                      data[i].meas_index);
-            _bme680Sensor->setResults(data[i]);
+            _bme680Sensor->setResults(data[i].status, data[i].gasIndex, data[i].measIndex, data[i].resHeat, data[i].idac,
+                                      data[i].gasWait, data[i].temperature, data[i].pressure, data[i].humidity, data[i].gasResistance);
         }
         return result;
     }

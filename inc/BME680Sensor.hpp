@@ -1,5 +1,7 @@
 #pragma once
 #include "I2C.hpp"
+#include "../driver/bme68x.h"
+#include "../driver/bme68x_defs.h"
 using namespace std;
 using namespace Components;
 namespace Environment
@@ -42,18 +44,19 @@ namespace Environment
         esp_err_t init();
         esp_err_t readAir();
 
-        void setResults(bme68x_data data)
+        void setResults(uint8_t status, uint8_t gasIndex, uint8_t measIndex, uint8_t resHeat, uint8_t idac, uint8_t gasWait,
+                        float temperature, float pressure, float humidity, float gasResistance)
         {
-            this->status = data.status;
-            this->gasIndex = data.gas_index;
-            this->measIndex = data.meas_index;
-            this->resHeat = data.res_heat;
-            this->idac = data.idac;
-            this->gasWait = data.gas_wait;
-            this->temperature = data.temperature;
-            this->pressure = data.pressure;
-            this->humidity = data.humidity;
-            this->gasResistance = data.gas_resistance;
+            this->status = status;
+            this->gasIndex = gasIndex;
+            this->measIndex = measIndex;
+            this->resHeat = resHeat;
+            this->idac = idac;
+            this->gasWait = gasWait;
+            this->temperature = temperature;
+            this->pressure = pressure;
+            this->humidity = humidity;
+            this->gasResistance = gasResistance;
         }
         constexpr uint8_t getStatus() { return status; }
         constexpr uint8_t getGasIndex() { return gasIndex; }
