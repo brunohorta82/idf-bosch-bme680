@@ -167,8 +167,8 @@ namespace Environment
                      data[i].status,
                      data[i].gas_index,
                      data[i].meas_index);
-            _bme680Sensor->setResults(data[i].status, data[i].gasIndex, data[i].measIndex, data[i].resHeat, data[i].idac,
-                                      data[i].gasWait, data[i].temperature, data[i].pressure, data[i].humidity, data[i].gasResistance);
+            _bme680Sensor->setResults(data[i].status, data[i].gas_index, data[i].meas_index, data[i].res_heat, data[i].idac,
+                                      data[i].gas_wait, data[i].temperature, data[i].pressure, data[i].humidity, data[i].gas_resistance);
         }
         return result;
     }
