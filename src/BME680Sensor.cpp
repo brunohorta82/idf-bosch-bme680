@@ -5,9 +5,7 @@ namespace Environment
 {
     esp_err_t BME680Sensor::init()
     {
-        esp_err_t result = ESP_OK;
-        result = bme688Init(this);
-        return result;
+        return bme688Init(this);
     }
 
     esp_err_t BME680Sensor::readAir()

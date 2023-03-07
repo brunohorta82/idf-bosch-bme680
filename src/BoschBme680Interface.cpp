@@ -60,6 +60,7 @@ namespace Environment
             return ESP_FAIL;
         }
     }
+    
     void bme68x_check_rslt(const char api_name[], int8_t rslt)
     {
         switch (rslt)
@@ -98,7 +99,7 @@ namespace Environment
 
         int8_t rslt;
 
-        /* Heater temperature in degree Celsius */ //TEST
+        /* Heater temperature in degree Celsius */
         uint16_t temp_prof[10] = {200, 240, 280, 320, 360, 360, 320, 280, 240, 200};
 
         /* Heating duration in milliseconds */
@@ -153,6 +154,8 @@ namespace Environment
 
         result = bme68x_get_data(BME68X_SEQUENTIAL_MODE, data, &n_fields, &bme688Device);
         bme68x_check_rslt("bme68x_get_data", result);
+
+        ESP_LOGD("BME688", "Nº Fields %d", n_fields);
         for (uint8_t i = 0; i < n_fields; i++)
         {
             ESP_LOGD("BME688", "Temperature(deg C)  Pressure(Pa) Humidity(%%)");
@@ -164,6 +167,7 @@ namespace Environment
                      data[i].status,
                      data[i].gas_index,
                      data[i].meas_index);
+            _bme680Sensor->setResults(data[i]);
         }
         return result;
     }
