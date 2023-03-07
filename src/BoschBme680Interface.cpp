@@ -9,7 +9,7 @@
 #include <cstring>
 
 using namespace std;
-namespace Environment
+namespace AirQuality
 {
     struct bme68x_dev bme688Device;
     struct bme68x_conf conf;

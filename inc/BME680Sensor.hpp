@@ -1,10 +1,8 @@
 #pragma once
 #include "I2C.hpp"
-#include "../driver/bme68x.h"
-#include "../driver/bme68x_defs.h"
 using namespace std;
 using namespace Components;
-namespace Environment
+namespace AirQuality
 {
     class BME680Sensor
     {

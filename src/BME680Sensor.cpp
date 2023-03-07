@@ -1,7 +1,7 @@
 #include "BME680Sensor.hpp"
 #include "BoschBme680Interface.hpp"
 
-namespace Environment
+namespace AirQuality
 {
     esp_err_t BME680Sensor::init()
     {
