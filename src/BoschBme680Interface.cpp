@@ -98,7 +98,7 @@ namespace Environment
 
         int8_t rslt;
 
-        /* Heater temperature in degree Celsius */
+        /* Heater temperature in degree Celsius */ //TEST
         uint16_t temp_prof[10] = {200, 240, 280, 320, 360, 360, 320, 280, 240, 200};
 
         /* Heating duration in milliseconds */
