@@ -143,34 +143,26 @@ namespace AirQuality
     {
         int8_t result;
         struct bme68x_data data[3];
-        uint32_t del_period;
         uint8_t n_fields;
 
-        ESP_LOGD("BME688", "Temperature(deg C), Pressure(Pa), Humidity(%%)");
-
-        /* Calculate delay period in microseconds */
-        del_period = bme68x_get_meas_dur(BME68X_SEQUENTIAL_MODE, &conf, &bme688Device) + (heatr_conf.heatr_dur_prof[0] * 1000);
-        bme688Device.delay_us(del_period, bme688Device.intf_ptr);
-
+        bme688Device.delay_us(360000, bme688Device.intf_ptr);
         result = bme68x_get_data(BME68X_SEQUENTIAL_MODE, data, &n_fields, &bme688Device);
         bme68x_check_rslt("bme68x_get_data", result);
 
-        ESP_LOGD("BME688", "Nº Fields %d", n_fields);
         for (uint8_t i = 0; i < n_fields; i++)
         {
-            ESP_LOGD("BME688", "Temperature(deg C)  Pressure(Pa) Humidity(%%)");
-            ESP_LOGD("BME688", "%.2f                %.2f         %.2f          | Gas resistance: %.2f ohm  Status: 0x%x  Profile index: %d  Measurement index: %d",
-                     data[i].temperature,
-                     data[i].pressure,
-                     data[i].humidity,
-                     data[i].gas_resistance,
-                     data[i].status,
-                     data[i].gas_index,
-                     data[i].meas_index);
-            _bme680Sensor->setResults(data[i].status, data[i].gas_index, data[i].meas_index, data[i].res_heat, data[i].idac,
-                                      data[i].gas_wait, data[i].temperature, data[i].pressure, data[i].humidity, data[i].gas_resistance);
+            _bme680Sensor->appendResults(
+                data[i].meas_index,
+                data[i].gas_index,
+                data[i].status,
+                data[i].res_heat,
+                data[i].idac,
+                data[i].gas_wait,
+                data[i].temperature,
+                data[i].pressure,
+                data[i].humidity,
+                data[i].gas_resistance);
         }
         return result;
     }
-
 }
