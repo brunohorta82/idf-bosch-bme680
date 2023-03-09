@@ -5,6 +5,8 @@
 #include "../driver/bme68x_defs.h"
 #include <esp_log.h>
 #include "I2C.hpp"
+#include "bsec_interface.h"
+#include "bsec_datatypes.h"
 #include <memory>
 #include <cstring>
 
@@ -136,6 +138,9 @@ namespace AirQuality
         bme68x_check_rslt("bme68x_set_heatr_conf", rslt);
         rslt = bme68x_set_op_mode(BME68X_SEQUENTIAL_MODE, &bme688Device);
         bme68x_check_rslt("bme68x_set_op_mode", rslt);
+
+        bsec_library_return_t result = BSEC_OK;
+        result = bsec_init();
         return ESP_OK;
     }
 
